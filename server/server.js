@@ -12,6 +12,23 @@ const iconv = require('iconv-lite');
 
 app.use(express.static('res'));
 
+app.use((req, res, next) => {
+    const origin = req.get('origin');
+  
+    // TODO Add origin validation
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
+  
+    // intercept OPTIONS method
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(204);
+    } else {
+      next();
+    }
+  });
+
 app.get('/', (req, res) => {
     res.send('OK');
 });
@@ -62,10 +79,9 @@ app.get('/cars', (req, res) => {
 
             let json = [];
             titles.forEach((title, i) => {
-                let number = i;
                 json.push({
                     id: ID(),
-                    number,
+                    number: i,
                     title,
                     price: prices[i],
                     year: years[i],
@@ -86,15 +102,14 @@ app.get('/cars', (req, res) => {
                 console.log('File successfully written! - Check your project directory for the output.json file');
             });
 
-            res.send('check console for info!');
+            res.send(json);
         }
     });
 });
 
-app.get('/cars/:id', (req, res) => {
-    res.send(`car with ID: ${req.params.id}`);
-});
-
+// app.get('/cars/:id', (req, res) => {
+//     res.send(`car with ID: ${req.params.id}`);
+// });
 
 http.listen(3003, () => {
     console.log('Serwer uruchomiony na porcie http://localhost:3003');
