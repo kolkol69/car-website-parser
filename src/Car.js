@@ -6,12 +6,7 @@ export default class Car extends Component {
     
     render() {
         const carAPI = this.props.carAPI;
-
-        // const carNumber = parseInt(props.match.params.number, 10);
         const car = carAPI[this.props.number];
-        console.log('\ncarNumber:', this.props.number);
-        console.log('\ncar:', car);
-        console.log('\n================================');
 
         if (!car) {
             return (
