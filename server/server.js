@@ -45,7 +45,14 @@ app.get('/cars', (req, res) => {
         uri: url
     };
     request(requestOptions, (error, response, _html) => {
-        const html = iconv.decode(_html, "windows-1251");
+        let buffer = _html;        
+        try{
+            buffer = Buffer.from(_html);
+        }catch(err){
+            console.warn('CONSOLE>>',err);
+        }
+        
+        const html = iconv.decode(buffer, "windows-1251");
 
         if (!error) {
             const $ = cheerio.load(html);
