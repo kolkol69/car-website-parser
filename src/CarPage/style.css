@@ -1,0 +1,45 @@
+.car-page-body {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.table{
+    margin-top: 20px;
+}
+
+
+.td-about{
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.h2{
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.carousel-inner{
+    /* margin-top: 20px; */
+    margin:auto;
+    width:100%;
+    max-width: 600px;
+}
+
+.back-link{
+    margin-bottom: 10px;
+}
+
+.back-link:link, .back-link:visited {
+    background-color: #0d5f4d9d;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-link:hover, .back-link:active {
+    background-color: #18887098;
+}
