@@ -31,3 +31,9 @@
     text-decoration: none;
     color: rgba(255, 2, 2, 0.418);
 }
+
+@media (max-width: 900px) {
+    .img-icon{
+        width:100%;
+    }
+}

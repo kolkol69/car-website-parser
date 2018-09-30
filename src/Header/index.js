@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
-import { Nav, MenuItem, NavDropdown, NavItem } from 'react-bootstrap'
 import './style.css'
 
-export default class Header extends Component {
-  render() {
+const Header = (props) =>{
     return (
       <Navbar collapseOnSelect>
         <Navbar.Header>
@@ -25,4 +23,4 @@ export default class Header extends Component {
       </Navbar>
     )
   }
-}
+  export default Header
