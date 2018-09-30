@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import { carAPI } from './output/carsdb.js'
 
 export default class Car extends Component {
     

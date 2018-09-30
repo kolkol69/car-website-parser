@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from './Home'
+import Home from './Home/Home'
 import CarsRoute from './CarsRoute'
 import { Route, Switch } from 'react-router-dom'
 
