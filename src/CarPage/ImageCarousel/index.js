@@ -11,20 +11,15 @@ const ImageCarousel = (props) => {
                 <ol className="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
                 </ol>
 
                 <div className="carousel-inner">
                     <div className="item active">
-                        <img src={car.img}  alt="Los Angeles" />
+                        <img src={car.img} alt='car' />
                     </div>
 
                     <div className="item">
-                        <img src={car.img}  alt="Chicago" />
-                    </div>
-
-                    <div className="item">
-                        <img src={car.img}  alt="New York" />
+                        <img src={car.img} alt='car' />
                     </div>
 
                     <a className="left carousel-control" href="#myCarousel" data-slide="prev">

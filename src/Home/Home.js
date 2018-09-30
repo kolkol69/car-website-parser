@@ -1,8 +1,15 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
+import './style.css'
 const Home = () => (
     <div>
-      <h1>Добро пожаловать на наш сайт!</h1>
+      <div className="header">
+        <div className="sides">
+        </div>
+        <div className="info">
+          <h1><Link className='car-link' to='/cars'>CAR LIST</Link></h1>
+        </div>
+      </div>
     </div>
   )
 
