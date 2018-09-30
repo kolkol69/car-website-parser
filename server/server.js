@@ -10,24 +10,22 @@ const request = require('request', {
 });
 const iconv = require('iconv-lite');
 
-app.use(express.static('res'));
-
 app.use((req, res, next) => {
     const origin = req.get('origin');
-  
+
     // TODO Add origin validation
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
-  
+
     // intercept OPTIONS method
     if (req.method === 'OPTIONS') {
-      res.sendStatus(204);
+        res.sendStatus(204);
     } else {
-      next();
+        next();
     }
-  });
+});
 
 app.get('/', (req, res) => {
     res.send('OK');
@@ -37,27 +35,29 @@ const ID = () => '_' + Math.random().toString(36).substr(2, 9);
 
 // GET method for ROUTES/WALLS to get them from database and send to front-end
 app.get('/cars', (req, res) => {
-    url = 'http://rst.ua/oldcars/audi/';
+    url = 'http://rst.ua/oldcars/audi/2.html';
 
+    let json = [];
     var requestOptions = {
         encoding: null,
         method: "GET",
         uri: url
     };
+
     request(requestOptions, (error, response, _html) => {
-        let buffer = _html;        
-        try{
-            buffer = Buffer.from(_html);
-        }catch(err){
-            console.warn('CONSOLE>>',err);
-        }
-        
-        const html = iconv.decode(buffer, "windows-1251");
+
+        const html = iconv.decode(Buffer.from(_html), "windows-1251");
 
         if (!error) {
             const $ = cheerio.load(html);
 
-            const imgs = $('.rst-ocb-i-i').map((_, img) => $(img).attr('src')).get();
+            const imgs = $('.rst-ocb-i-i').map((_, img) => {
+                src = $(img).attr('src');
+                srcArray = src.split('/');
+                srcArray[srcArray.indexOf('middle')]='big'
+                src = srcArray.join('/');
+                return src;
+            }).get();
             const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
             const details = $('.rst-ocb-i-d-l-i-s').map((_, detail) => $(detail).text()).get();
             const descriptions = $('.rst-ocb-i-d-d').map((_, description) => $(description).text()).get();
@@ -66,6 +66,9 @@ app.get('/cars', (req, res) => {
                 if ($(mileage).text().slice(0, 3).toLowerCase() === 'год') {
                     return $(mileage).text().split(',').slice(1, 2)[0].replace(/[()]/g, '');
                 }
+            }).get();
+            const links = $('.rst-ocb-i-a').map((_, img) => {
+                return 'http://rst.ua' + $(img).attr('href')
             }).get();
 
             const prices = [];
@@ -84,7 +87,6 @@ app.get('/cars', (req, res) => {
                 transmissionTypes.push(details[i + 5]);
             };
 
-            let json = [];
             titles.forEach((title, i) => {
                 json.push({
                     id: ID(),
@@ -99,24 +101,15 @@ app.get('/cars', (req, res) => {
                     description: descriptions[i],
                     mileage: mileages[i],
                     updateDate: updateDates[i],
+                    link: links[i],
                     img: imgs[i],
                 });
             });
 
-            console.log('last json elem: ', Object.keys(json).length-1);
-
-            fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {
-                console.log('File successfully written! - Check your project directory for the output.json file');
-            });
-
-            res.send(json);
         }
+        res.send(json);
     });
 });
-
-// app.get('/cars/:id', (req, res) => {
-//     res.send(`car with ID: ${req.params.id}`);
-// });
 
 http.listen(3003, () => {
     console.log('Serwer uruchomiony na porcie http://localhost:3003');

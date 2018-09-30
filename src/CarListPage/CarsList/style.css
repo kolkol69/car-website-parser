@@ -32,8 +32,18 @@
     color: rgba(255, 2, 2, 0.418);
 }
 
-@media (max-width: 900px) {
+.img-icon{
+    width: 200px;
+    height: 150px;
+}
+ @media (max-width: 600px) {
     .img-icon{
         width:100%;
     }
 }
+/*
+@media (max-width: 900px) {
+    .img-icon{
+        width:100%;
+    }
+} */

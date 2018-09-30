@@ -40,12 +40,15 @@ const CarDetails = (props) => {
                         <td className='td-about'>{car.mileage}</td>
                     </tr>
                     <tr>
+                        <td>Link to original post:</td>
+                        <td className='td-about'><a href={car.link}>Click to follow the original link</a></td>
+                    </tr>
+                    <tr>
                         <td>Last Update date:</td>
                         <td className='td-about'>{car.updateDate}</td>
                     </tr>
                 </tbody>
             </table>
-            
         </div>
     )
 }
