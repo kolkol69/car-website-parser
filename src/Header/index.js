@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, FormGroup, FormControl, Button } from 'react-bootstrap'
 import './style.css'
 
 const Header = () => (
@@ -18,6 +18,14 @@ const Header = () => (
         <Link className='nav-item' to='/cars'>Cars</Link>
       </NavItem >
     </Nav>
+    <Navbar.Collapse>
+      <Navbar.Form >
+        <FormGroup>
+          <FormControl type="text" placeholder="Search" />
+        </FormGroup>{' '}
+        {/* <Button type="submit">Submit</Button> */}
+      </Navbar.Form>
+    </Navbar.Collapse>
   </Navbar>
 )
 
