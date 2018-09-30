@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ListGroup, ListGroupItem, Image } from 'react-bootstrap'
 import './style.css'
 
 export default class CarsList extends Component {
   render() {
-    const carAPI = this.props.carAPI;
+    const carAPI = this.props.filteredArray;
+
     return (
       <ListGroup className='row list-unstyled'>
         {

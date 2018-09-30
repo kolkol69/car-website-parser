@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-export default class Car extends Component {
+export default class CarPage extends Component {
     
     render() {
         const carAPI = this.props.carAPI;
