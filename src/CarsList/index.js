@@ -15,9 +15,8 @@ export default class CarsList extends Component {
               className='col-md-6 col-xs-12'
             >
               <Link className='col-md-1 col-xs-6' to={`/cars/${car.number}`}><Image src={car.img}  /></Link>
-              {/* <Link className='col-md-1' to={`/cars/${car.number}`}><Image className='col-md-1 col-xs-6' src={car.img}  /></Link> */}
-              <Link className='header-link col-md-6 col-xs-6 col-md-offset-5' to={`/cars/${car.number}`}><h4>{car.title}</h4></Link>
-              <span className='col-md-6 col-xs-6 col-md-offset-5'>
+              <Link className='title-link col-md-6 col-xs-6 col-md-offset-5' to={`/cars/${car.number}`}><h4>{car.title}</h4></Link>
+              <span className='col-md-6 col-xs-6 col-md-offset-5'>  
                 Price: {car.price} 
                 <br/>
                 Year: {car.year}

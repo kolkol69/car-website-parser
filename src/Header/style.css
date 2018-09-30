@@ -1,0 +1,33 @@
+.nav-item {
+    outline: none;
+    text-decoration: none;
+    color:rgba(153, 153, 153, 0.781);
+}
+
+/* unvisited link */
+.nav-item:link {
+    outline: none;
+    text-decoration: none;
+    color:rgba(153, 153, 153, 0.781);
+}
+
+/* visited link */
+.nav-item:visited {
+    outline: none;
+    text-decoration: none;
+    color:rgba(153, 153, 153, 0.781);
+}
+
+/* mouse over link */
+.nav-item:hover {
+    outline: none;
+    text-decoration: none;
+    color:rgba(128, 128, 128, 0.897);
+}
+
+/* selected link */
+.nav-item:active {
+    outline: none;
+    text-decoration: none;
+    color:rgba(172, 172, 172, 0.897);
+}

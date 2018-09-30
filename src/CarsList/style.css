@@ -1,8 +1,33 @@
-.header-link {
+.title-link {
     outline: none;
     text-decoration: none;
+    color:red;
 }
 
-.li-background{
-    background-color: rgba(94, 223, 212, 0.096) !important;
+/* unvisited link */
+.title-link:link {
+    outline: none;
+    text-decoration: none;
+    color: red;
+}
+
+/* visited link */
+.title-link:visited {
+    outline: none;
+    text-decoration: none;
+    color: rgb(0, 255, 213);
+}
+
+/* mouse over link */
+.title-link:hover {
+    outline: none;
+    text-decoration: none;
+    color: rgba(207, 0, 0, 0.74);
+}
+
+/* selected link */
+.title-link:active {
+    outline: none;
+    text-decoration: none;
+    color: rgba(255, 2, 2, 0.418);
 }
