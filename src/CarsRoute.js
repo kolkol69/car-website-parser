@@ -18,7 +18,6 @@ export default class CarsRoute extends Component {
     return (
       <Switch>
         <Route exact path="/cars" render={props => <CarListPage carAPI={this.state.carAPI} {...props.match.params} />} />
-        {/* <Route exact path="/cars" render={props => <CarsList carAPI={this.state.carAPI} {...props.match.params} />} /> */}
         <Route path="/cars/:number" render={props => <CarPage carAPI={this.state.carAPI} {...props.match.params}/>} />
       </Switch>
     )

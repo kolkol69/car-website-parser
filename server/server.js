@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
 
 const ID = () => '_' + Math.random().toString(36).substr(2, 9);
 
-// GET method for ROUTES/WALLS to get them from database and send to front-end
 app.get('/cars', (req, res) => {
     url = 'http://rst.ua/oldcars/audi/2.html';
 
