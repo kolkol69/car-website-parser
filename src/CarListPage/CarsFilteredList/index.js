@@ -15,7 +15,7 @@ export default class CarsFilteredList extends Component {
             <FormControl onChange={this.filterList} type="text" placeholder="Search" />
           </FormGroup>
         </form>
-        <CarList filteredArray={this.state.filteredArray[0] ? this.state.filteredArray : this.props.carAPI} {...this.props} />
+        <CarList filteredArray={this.state.filteredArray.length ? this.state.filteredArray : this.props.carAPI} {...this.props} />
       </div>
     )
   }

@@ -1,3 +1,5 @@
+// $ cat output.json | sed 's/http.*\.jpg/https:\/\/icdn2\.digitaltrends\.com\/image\/apple-car-3-970x647-c-3-720x720.jpg/g' > report.txt
+
 [
     {
         "id": "_wgpf4arir",
