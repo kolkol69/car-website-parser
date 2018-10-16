@@ -1,4 +1,10 @@
+////
 const fs = require('fs');
+const path = require('path');
+// $ cat output.json | sed 's/http.*\.jpg/https:\/\/icdn2\.digitaltrends\.com\/image\/apple-car-3-970x647-c-3-720x720.jpg/g' > report.txt
+// sed to replace all image links
+////
+
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -53,7 +59,7 @@ app.get('/cars', (req, res) => {
             const imgs = $('.rst-ocb-i-i').map((_, img) => {
                 src = $(img).attr('src');
                 srcArray = src.split('/');
-                srcArray[srcArray.indexOf('middle')]='big'
+                srcArray[srcArray.indexOf('middle')] = 'big'
                 src = srcArray.join('/');
                 return src;
             }).get();
@@ -106,7 +112,11 @@ app.get('/cars', (req, res) => {
             });
 
         }
-        res.send(json);
+        fs.readFile(path.join(__dirname, 'output.json'), (err, data) => {  
+            if (err) throw err;
+        res.send(JSON.parse(data));
+        });
+        // res.send(json);
     });
 });
 

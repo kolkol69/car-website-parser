@@ -15,11 +15,11 @@ const ImageCarousel = (props) => {
 
                 <div className="carousel-inner">
                     <div className="item active">
-                        <img src={car.img} alt='car' />
+                        <img src={car.img[0]} alt='car' />
                     </div>
 
                     <div className="item">
-                        <img src={car.img} alt='car' />
+                        <img src={car.img[1]} alt='car' />
                     </div>
 
                     <a className="left carousel-control" href="#myCarousel" data-slide="prev">
