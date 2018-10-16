@@ -95,7 +95,6 @@ module.exports = (function () {
             }
             fs.readFile(path.join(__dirname, '../output.json'), (err, data) => {
                 if (err) throw err;
-                console.log(JSON.parse(data))
                 res.send(JSON.parse(data));
             });
             // res.send(json);
