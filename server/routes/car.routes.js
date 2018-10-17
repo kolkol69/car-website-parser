@@ -9,8 +9,10 @@ const request = require('request', {
 const iconv = require('iconv-lite');
 const IdGenerator = require('../controls/id.generator.js');
 ////
+const link = require('../controls/url.parser');
 const fs = require('fs');
 const path = require('path');
+const urlExists = require('url-exists');
 ////
 
 module.exports = (function () {
@@ -40,11 +42,8 @@ module.exports = (function () {
                 const $ = cheerio.load(html);
 
                 const imgs = $('.rst-ocb-i-i').map((_, img) => {
-                    let src = $(img).attr('src');
-                    let srcArray = src.split('/');
-                    srcArray[srcArray.indexOf('middle')] = 'big'
-                    src = srcArray.join('/');
-                    return src;
+                    const imgParsedUrl = link.urlParser($(img).attr('src'));
+                    return imgParsedUrl;
                 }).get();
                 const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
                 const details = $('.rst-ocb-i-d-l-i-s').map((_, detail) => $(detail).text()).get();
@@ -56,7 +55,7 @@ module.exports = (function () {
                     }
                 }).get();
                 const links = $('.rst-ocb-i-a').map((_, img) => {
-                    return 'http://rst.ua' + $(img).attr('href')
+                    return 'http://rst.ua' + $(img).attr('href');
                 }).get();
 
                 const prices = [];
@@ -94,14 +93,14 @@ module.exports = (function () {
                     });
                 });
             }
-            fs.readFile(path.join(__dirname, '../output.json'), (err, data) => {
-                if (err) throw err;
-                // console.log('cars json:', JSON.parse(data));
-                res.send(JSON.parse(data));
+
+            fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {
+                console.log('File successfully written! - Check your project directory for the output.json file');
             });
-            // res.send(json);
+            res.send(json);
         });
-    })
+
+    });
 
     return router;
 })();

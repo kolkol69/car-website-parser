@@ -27,8 +27,6 @@ app.use((req, res, next) => {
   }
 });
 
-
-
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath

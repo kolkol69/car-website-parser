@@ -1,0 +1,1 @@
+exports.summa = (a,b) => a+b;
