@@ -10,8 +10,8 @@ const request = require('request', {
 });
 
 const imgLink = require('../controls/url.parser');
-const unpack = require('../controls/unpack.details');
 const jsonObj = require('../controls/getJson');
+const unpack = require('../controls/unpack.details');
 
 module.exports = (function () {
     'use strict';
@@ -43,7 +43,7 @@ module.exports = (function () {
                     return imgParsedUrl;
                 }).get();
                 const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
-                const details = $('.rst-ocb-i-d-l-i-s').map((_, detail) => $(detail).text()).get();
+                const carDetails = $('.rst-ocb-i-d-l-i-s').map((_, detail) => $(detail).text()).get();
                 const descriptions = $('.rst-ocb-i-d-d').map((_, description) => $(description).text()).get();
                 const updateDates = $('.rst-ocb-i-s').map((_, updateDate) => $(updateDate).text().split(' ').slice(-1)).get();
                 const mileages = $('.rst-ocb-i-d-l-i').map((_, mileage) => {
@@ -55,39 +55,16 @@ module.exports = (function () {
                     return 'http://rst.ua' + $(img).attr('href');
                 }).get();
 
-                let prices = [];
-                let locations = [];
-                let years = [];
-                let conditions = [];
-                let engines = [];
-                let transmissionTypes = [];
-
-                ({
-                    prices,
-                    locations,
-                    years,
-                    conditions,
-                    engines,
-                    transmissionTypes
-                } = unpack.getDetailsObj(details));
-
-                // details zapushyty w seredynu getJson !!!
-
-                const tmp = {
+                const carMainDetails = {
                     titles,
-                    prices,
-                    years,
-                    conditions,
-                    engines,
-                    transmissionTypes,
-                    locations,
                     descriptions,
                     mileages,
                     updateDates,
                     links,
                     imgs
-                }
-                json = jsonObj.getJson();
+                };
+
+                json = jsonObj.getJson({...carMainDetails,...unpack.getDetailsObj(carDetails)});
             }
 
             fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {

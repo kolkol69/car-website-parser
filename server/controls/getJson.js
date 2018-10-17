@@ -1,8 +1,26 @@
 const IdGenerator = require('./id.generator');
+// const unpack = require('../controls/unpack.details');
 
-exports.getJson = (cars) => {
+exports.getJson = (carDetails) => {
     let json = [];
-    cars.forEach((title, i) => {
+
+    // const ? let ? ???
+    ({
+        titles,
+        descriptions,
+        mileages,
+        updateDates,
+        links,
+        imgs,
+        prices,
+        locations,
+        years,
+        conditions,
+        engines,
+        transmissionTypes
+    } = carDetails);
+
+    titles.forEach((title, i) => {
         json.push({
             id: IdGenerator.ID(),
             number: i,
