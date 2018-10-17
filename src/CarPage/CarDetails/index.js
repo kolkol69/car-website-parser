@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CarDetails extends Component {
-    componentDidMount() {
-        console.log(this.props)
-        fetch(`http://localhost:3003/cars/${this.props.number}`)
-            // .then(response => response.json())
-            .then(data => console.log(data))
+    static propTypes = {
+        number: PropTypes.string.isRequired,
+        carAPI: PropTypes.array.isRequired
     }
+
+    // componentDidMount() {
+    //     console.log(this.props)
+    //     fetch(`http://localhost:3000/cars/${this.props.number}`)
+    //         // .then(response => response.json())
+    //         .then(data => console.log(data))
+    // }
     render() {
         const car = this.props.carAPI[this.props.number];
         return (
@@ -60,13 +66,4 @@ export default class CarDetails extends Component {
         )
     }
 }
-
-//   render() {
-//     return (
-//       <div>
-
-//       </div>
-//     )
-//   }
-// }
 

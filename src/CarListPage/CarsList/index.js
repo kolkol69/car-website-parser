@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { ListGroup, ListGroupItem, Image } from 'react-bootstrap'
-import './style.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { ListGroup, ListGroupItem, Image } from 'react-bootstrap';
+import './style.css';
 
 const CarsList = (props) => {
   const carAPI = props.filteredArray;
@@ -31,4 +32,9 @@ const CarsList = (props) => {
     </ListGroup>
   )
 }
+
+CarsList.propTypes = {
+  filteredArray : PropTypes.array.isRequired
+}
+
 export default CarsList;

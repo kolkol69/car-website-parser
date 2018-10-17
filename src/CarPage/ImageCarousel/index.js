@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 const ImageCarousel = (props) => {
     const car = props.carAPI[props.number];
@@ -35,4 +36,10 @@ const ImageCarousel = (props) => {
         </div>
     )
 }
-export default ImageCarousel
+
+ImageCarousel.propTypes = {
+    number: PropTypes.string.isRequired,
+    carAPI: PropTypes.array.isRequired
+}
+
+export default ImageCarousel;

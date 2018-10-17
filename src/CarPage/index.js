@@ -1,8 +1,9 @@
-import React from 'react'
-import CarDetails from './CarDetails'
-import ImageCarousel from './ImageCarousel'
-import { Link } from 'react-router-dom'
-import './style.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import CarDetails from './CarDetails';
+import ImageCarousel from './ImageCarousel';
+import { Link } from 'react-router-dom';
+import './style.css';
 
 const CarPage = (props) => {
 
@@ -22,5 +23,11 @@ const CarPage = (props) => {
         </div>
     )
 }
-export default CarPage
+
+CarPage.propTypes = {
+    number: PropTypes.string.isRequired,
+    carAPI: PropTypes.array.isRequired
+}
+
+export default CarPage;
 

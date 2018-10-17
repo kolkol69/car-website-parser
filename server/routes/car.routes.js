@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const cheerio = require('cheerio');
 const request = require('request', {
@@ -6,7 +7,7 @@ const request = require('request', {
     }
 });
 const iconv = require('iconv-lite');
-const IdGenerator = require('../modules/id.generator.js');
+const IdGenerator = require('../controls/id.generator.js');
 ////
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +19,7 @@ module.exports = (function () {
 
     router.get('/:id', (req, res) => {
         res.send('cos');
-        console.log(req.params.id)
+        // console.log('id:', req.params.id);
     });
 
     router.get('/', (req, res) => {
@@ -39,8 +40,8 @@ module.exports = (function () {
                 const $ = cheerio.load(html);
 
                 const imgs = $('.rst-ocb-i-i').map((_, img) => {
-                    src = $(img).attr('src');
-                    srcArray = src.split('/');
+                    let src = $(img).attr('src');
+                    let srcArray = src.split('/');
                     srcArray[srcArray.indexOf('middle')] = 'big'
                     src = srcArray.join('/');
                     return src;
@@ -72,7 +73,7 @@ module.exports = (function () {
                     conditions.push(details[i + 3]);
                     engines.push(details[i + 4]);
                     transmissionTypes.push(details[i + 5]);
-                };
+                }
 
                 titles.forEach((title, i) => {
                     json.push({
@@ -89,12 +90,13 @@ module.exports = (function () {
                         mileage: mileages[i],
                         updateDate: updateDates[i],
                         link: links[i],
-                        img: imgs[i],
+                        img: imgs[i]
                     });
                 });
             }
             fs.readFile(path.join(__dirname, '../output.json'), (err, data) => {
                 if (err) throw err;
+                // console.log('cars json:', JSON.parse(data));
                 res.send(JSON.parse(data));
             });
             // res.send(json);

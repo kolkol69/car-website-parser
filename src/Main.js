@@ -1,7 +1,7 @@
-import React from 'react'
-import Home from './Home/Home'
-import CarsRoute from './CarsRoute'
-import { Route, Switch } from 'react-router-dom'
+import React from 'react';
+import Home from './Home/Home';
+import CarsRoute from './CarsRoute';
+import { Route, Switch } from 'react-router-dom';
 
 const Main = () => {
     return (
@@ -12,4 +12,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default Main;
