@@ -1,19 +1,17 @@
 /* eslint-disable no-console */
 const express = require('express');
 const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
+const fs = require('fs');
 const request = require('request', {
     headers: {
         'Content-Type': 'text/html; charset=UTF-8'
     }
 });
-const iconv = require('iconv-lite');
-const IdGenerator = require('../controls/id.generator.js');
-////
-const link = require('../controls/url.parser');
-const fs = require('fs');
-const path = require('path');
-const urlExists = require('url-exists');
-////
+
+const imgLink = require('../controls/url.parser');
+const unpack = require('../controls/unpack.details');
+const jsonObj = require('../controls/getJson');
 
 module.exports = (function () {
     'use strict';
@@ -21,7 +19,6 @@ module.exports = (function () {
 
     router.get('/:id', (req, res) => {
         res.send('cos');
-        // console.log('id:', req.params.id);
     });
 
     router.get('/', (req, res) => {
@@ -42,7 +39,7 @@ module.exports = (function () {
                 const $ = cheerio.load(html);
 
                 const imgs = $('.rst-ocb-i-i').map((_, img) => {
-                    const imgParsedUrl = link.urlParser($(img).attr('src'));
+                    const imgParsedUrl = imgLink.urlParser($(img).attr('src'));
                     return imgParsedUrl;
                 }).get();
                 const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
@@ -58,40 +55,39 @@ module.exports = (function () {
                     return 'http://rst.ua' + $(img).attr('href');
                 }).get();
 
-                const prices = [];
-                const locations = [];
-                const years = [];
-                const conditions = [];
-                const engines = [];
-                const transmissionTypes = [];
+                let prices = [];
+                let locations = [];
+                let years = [];
+                let conditions = [];
+                let engines = [];
+                let transmissionTypes = [];
 
-                for (let i = 0; i <= details.length - 6; i += 6) {
-                    prices.push(details[i].split('\'').join());
-                    locations.push(details[i + 1]);
-                    years.push(details[i + 2]);
-                    conditions.push(details[i + 3]);
-                    engines.push(details[i + 4]);
-                    transmissionTypes.push(details[i + 5]);
+                ({
+                    prices,
+                    locations,
+                    years,
+                    conditions,
+                    engines,
+                    transmissionTypes
+                } = unpack.getDetailsObj(details));
+
+                // details zapushyty w seredynu getJson !!!
+
+                const tmp = {
+                    titles,
+                    prices,
+                    years,
+                    conditions,
+                    engines,
+                    transmissionTypes,
+                    locations,
+                    descriptions,
+                    mileages,
+                    updateDates,
+                    links,
+                    imgs
                 }
-
-                titles.forEach((title, i) => {
-                    json.push({
-                        id: IdGenerator.ID(),
-                        number: i,
-                        title,
-                        price: prices[i],
-                        year: years[i],
-                        condition: conditions[i],
-                        engine: engines[i],
-                        transmissionType: transmissionTypes[i],
-                        location: locations[i],
-                        description: descriptions[i],
-                        mileage: mileages[i],
-                        updateDate: updateDates[i],
-                        link: links[i],
-                        img: imgs[i]
-                    });
-                });
+                json = jsonObj.getJson();
             }
 
             fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {
