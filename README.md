@@ -5,4 +5,5 @@ How to test app:
 3. Run ```npm start``` to start FE/BE
 
 ~~4. Run ```node .\server\server.js``` to start BE~~
+
 5. Check result in your browser
