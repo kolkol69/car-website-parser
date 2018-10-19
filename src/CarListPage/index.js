@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import CarsFilteredList from './CarsFilteredList'
+import React, { Component } from 'react';
+import CarsFilteredList from './CarsFilteredList';
 
 export default class CarListPage extends Component {
     render() {
@@ -7,6 +7,6 @@ export default class CarListPage extends Component {
             <div>
                 <CarsFilteredList {...this.props}/>
             </div>
-        )
+        );
     }
 }

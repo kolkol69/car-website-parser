@@ -63,7 +63,7 @@ export default class CarDetails extends Component {
                     </tbody>
                 </table>
             </div>
-        )
+        );
     }
 }
 

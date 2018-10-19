@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Navbar } from 'react-bootstrap'
-import './style.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
+import './style.css';
 
 const Header = (props) => {
   return (
@@ -21,6 +21,6 @@ const Header = (props) => {
         </Navbar.Text >
       </Navbar.Collapse>
     </Navbar>
-  )
-}
-export default Header
+  );
+};
+export default Header;

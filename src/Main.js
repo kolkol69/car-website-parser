@@ -9,7 +9,7 @@ const Main = () => {
             <Route exact path='/' component={Home}/>
             <Route path='/cars' component={CarsRoute}/>
         </Switch>
-    )
-}
+    );
+};
 
 export default Main;

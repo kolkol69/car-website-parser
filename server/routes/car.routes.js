@@ -63,8 +63,11 @@ module.exports = (function () {
                     links,
                     imgs
                 };
+                const unpackedCarDetails = {
+                    ...unpack.getDetailsObj(carDetails)
+                };
 
-                json = jsonObj.getJson({...carMainDetails,...unpack.getDetailsObj(carDetails)});
+                json = jsonObj.getJson({...carMainDetails,...unpackedCarDetails});
             }
 
             fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {

@@ -12,7 +12,7 @@ const CarPage = (props) => {
             <div>
                 Sorry, the given car number was not found
             </div>
-        )
+        );
     }
 
     return (
@@ -21,13 +21,13 @@ const CarPage = (props) => {
             <CarDetails {...props} />
             <Link className="back-link" to='/cars'>Back to Car List</Link>
         </div>
-    )
-}
+    );
+};
 
 CarPage.propTypes = {
     number: PropTypes.string.isRequired,
     carAPI: PropTypes.array.isRequired
-}
+};
 
 export default CarPage;
 

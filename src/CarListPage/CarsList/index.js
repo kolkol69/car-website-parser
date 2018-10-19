@@ -30,11 +30,11 @@ const CarsList = (props) => {
         ))
       }
     </ListGroup>
-  )
-}
+  );
+};
 
 CarsList.propTypes = {
   filteredArray : PropTypes.array.isRequired
-}
+};
 
 export default CarsList;

@@ -1,5 +1,4 @@
 const IdGenerator = require('./id.generator');
-// const unpack = require('../controls/unpack.details');
 
 exports.getJson = (carDetails) => {
     let json = [];

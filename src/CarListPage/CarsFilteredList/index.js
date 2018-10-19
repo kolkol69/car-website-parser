@@ -11,7 +11,7 @@ export default class CarsFilteredList extends Component {
   filterList = (event) => {
     let filteredArray = this.props.carAPI;
     let searchValue = event.target.value.toLowerCase();
-    filteredArray = filteredArray.filter(item => item.title.toLowerCase().search(searchValue) !== -1)
+    filteredArray = filteredArray.filter(item => item.title.toLowerCase().search(searchValue) !== -1);
     this.setState({ filteredArray });
   }
 
@@ -25,10 +25,10 @@ export default class CarsFilteredList extends Component {
         </form>
         <CarList filteredArray={this.state.filteredArray.length ? this.state.filteredArray : this.props.carAPI} {...this.props} />
       </div>
-    )
+    );
   }
 }
 
 CarsFilteredList.propTypes = {
   carAPI: PropTypes.array.isRequired
-}
+};
