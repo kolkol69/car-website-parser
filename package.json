@@ -4,7 +4,7 @@
   "description": "Boilerplate for fast start",
   "scripts": {
     "start": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "node server/server.js",
+    "open:src": "nodemon server/server.js",
     "lint": "esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch"
   },
@@ -14,11 +14,13 @@
     "babel-eslint": "^10.0.1",
     "babel-polyfill": "6.8.0",
     "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.3",
     "bootstrap": "3.3.6",
     "history": "^4.7.2",
     "jquery": "2.2.3",
     "nodemon": "^1.18.4",
     "prop-types": "^15.6.2",
+    "querystring": "^0.2.0",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",

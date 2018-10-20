@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 
 export default class CarDetails extends Component {
     static propTypes = {
-        number: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
         carAPI: PropTypes.array.isRequired
     }
-
-    // componentDidMount() {
-    //     console.log(this.props)
-    //     fetch(`http://localhost:3000/cars/${this.props.number}`)
-    //         // .then(response => response.json())
-    //         .then(data => console.log(data))
-    // }
+    
     render() {
-        const car = this.props.carAPI[this.props.number];
+        const car = this.props.carAPI[this.props.id];
         return (
             <div className='col-md-12'>
                 <table className="table table-hover">

@@ -1,4 +1,4 @@
-const IdGenerator = require('./id.generator');
+const ID = () => '_' + Math.random().toString(36).substr(2, 9);
 
 exports.getJson = (carDetails) => {
     let json = [];
@@ -21,7 +21,7 @@ exports.getJson = (carDetails) => {
 
     titles.forEach((title, i) => {
         json.push({
-            id: IdGenerator.ID(),
+            id: ID(),
             number: i,
             title,
             price: prices[i],

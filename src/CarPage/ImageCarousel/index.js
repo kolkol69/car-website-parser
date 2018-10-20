@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ImageCarousel = (props) => {
-    const car = props.carAPI[props.number];
+    const car = props.carAPI[props.id];
     return (
         <div className='row car-page-body'>
             <div className='col-md-12'>
@@ -38,7 +38,7 @@ const ImageCarousel = (props) => {
 };
 
 ImageCarousel.propTypes = {
-    number: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     carAPI: PropTypes.array.isRequired
 };
 
