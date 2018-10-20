@@ -10,11 +10,10 @@ class CarPage extends React.Component {
     state = {
         carAPI: []
     }
-
     componentDidMount() {
-        const queryParams = getAllUrlParams();
-        console.log('queryParams', queryParams)
-        fetch(`http://localhost:3000/cars_data/${this.props.id}?type=${queryParams.type}&model=${queryParams.model}`)
+        const {type, model} = getAllUrlParams();
+        fetch(`http://localhost:3000/cars_data/${this.props.id}?type=${type}&model=${model}`)
+            .then(response => response.json())
             .then(data => this.setState({carAPI: data}));
     }
     render() {

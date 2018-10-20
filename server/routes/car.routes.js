@@ -33,36 +33,41 @@ module.exports = (() => {
 
             if (!error) {
                 const $ = cheerio.load(html);
-                const title = $('#rst-page-oldcars-item-header').text().substring($('#rst-page-oldcars-item-header').children().text().length);
-                const imgs = $('.rst-uix-float-left .rst-uix-radius').map((_, img) => {
-                    if ($(img).get(0).tagName == 'a') {
-                        return car.urlParser($(img).attr('href'));
-                    }
-                }).get();
-                const _imgs = $('.rst-uix-float-left','.rst-uix-radius').map((_, img) => {
-                    return $(img).attr('href');
-                }).get();
-                console.log('IMGIMGIMGIMG====',_imgs);
-
-                // [ '133200 грн ', ' $4750' ]
-                const price = $('.rst-uix-price-param').text().replace(/\'/g, '').split('/');
+                const title = $('#rst-page-oldcars-item-header').text()
+                    .substring($('#rst-page-oldcars-item-header').children().text().length);
+                const imgs = $('.rst-uix-float-left', '.rst-uix-radius').map((_, img) => car.urlParser($(img).attr('href'))).get();
+                const details = $('.rst-uix-table-superline').children().map((_, elem) => $(elem).text().split(':')[1]).get();
+                console.log(details)
+                const price = details[0].replace(/\'/g, '').split('/').join(' - ');
+                const [_, year, engine, transmissionType, bodyType, location, views, updateDate] = details;
+                const description = $('#rst-page-oldcars-item-option-block-container-desc').text();
+                const contacts = $('.rst-page-oldcars-item-option-block-container')
+                .map((_,el)=> $(el).children()).get()[1]
+                .map((_, el)=> $(el).text()).get();
 
                 json = {
                     title,
-                    imgs: [..._imgs],
-                    price
+                    imgs: [...imgs],
+                    price,
+                    year,
+                    engine,
+                    transmissionType, 
+                    bodyType,
+                    location,
+                    views,
+                    updateDate,
+                    url,
+                    description,
+                    contacts
                 };
             }
 
-            fs.writeFile('./output_car.json', JSON.stringify(json, null, 4), () => {
-                console.log('CAR file successfully written!');
-            });
             res.send(json);
         });
     });
 
     router.get('/', (req, res) => {
-        const url = 'http://rst.ua/oldcars/audi/2.html';
+        const url = 'http://rst.ua/oldcars/audi/1.html';
 
         let json = [];
         const requestOptions = {
@@ -109,9 +114,6 @@ module.exports = (() => {
                 });
             }
 
-            // fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {
-            // console.log('File successfully written! - Check your project directory for the output.json file');
-            // });
             res.send(json);
         });
 

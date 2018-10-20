@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ImageCarousel = (props) => {
-    const car = props.carAPI[props.id];
+    const car = props.carAPI;
+    console.log('car', car);
     return (
         <div className='row car-page-body'>
             <div className='col-md-12'>
@@ -17,15 +18,15 @@ const ImageCarousel = (props) => {
 
                 <div className="carousel-inner">
                     <div className="item active">
-                        <img src={car.img[0]} alt='car' />
+                        <img src={car.imgs[0]} alt='car' />
                     </div>
 
                     <div className="item">
-                        <img src={car.img[1]} alt='car' />
+                        <img src={car.imgs[1]} alt='car' />
                     </div>
 
                     <div className="item">
-                        <img src={car.img[2]} alt='car' />
+                        <img src={car.imgs[2]} alt='car' />
                     </div>
 
                     <a className="left carousel-control" href="#myCarousel" data-slide="prev">
