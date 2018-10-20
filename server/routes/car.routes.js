@@ -9,9 +9,8 @@ const request = require('request', {
     }
 });
 
-const imgLink = require('../controls/url.parser');
-const jsonObj = require('../controls/get.json');
-const unpack = require('../controls/unpack.details');
+const car = require('../controls/car'); //urlParser
+const carList = require('../controls/car.list.js');
 
 
 
@@ -34,28 +33,25 @@ module.exports = (() => {
 
             if (!error) {
                 const $ = cheerio.load(html);
+                const title = $('#rst-page-oldcars-item-header').text().substring($('#rst-page-oldcars-item-header').children().text().length);
+                const imgs = $('.rst-uix-float-left .rst-uix-radius').map((_, img) => {
+                    if ($(img).get(0).tagName == 'a') {
+                        return car.urlParser($(img).attr('href'));
+                    }
+                }).get();
+                const _imgs = $('.rst-uix-float-left','.rst-uix-radius').map((_, img) => {
+                    return $(img).attr('href');
+                }).get();
+                console.log('IMGIMGIMGIMG====',_imgs);
+
                 // [ '133200 грн ', ' $4750' ]
-                const imgs = $('.rst-uix-float-left rst-uix-radius').map((_, img) => imgLink.urlParser($(img).attr('src'))).get();
-                const price = $('.rst-uix-price-param').map((_, detail) => $(detail).text()).get()[0].replace(/\'/g, '').split('/');
-                
-                // const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
-                // const descriptions = $('.rst-ocb-i-d-d').map((_, description) => $(description).text()).get();
-                // const updateDates = $('.rst-ocb-i-s').map((_, updateDate) => $(updateDate).text().split(' ').slice(-1)).get();
-                // const mileages = $('.rst-ocb-i-d-l-i').map((_, mileage) => {
-                //     if ($(mileage).text().slice(0, 3).toLowerCase() === 'год') {
-                //         return $(mileage).text().split(',').slice(1, 2)[0].replace(/[()]/g, '');
-                //     }
-                // }).get();
-                // const links = $('.rst-ocb-i-a').map((_, img) => {
-                //     return 'http://rst.ua' + $(img).attr('href');
-                // }).get();
+                const price = $('.rst-uix-price-param').text().replace(/\'/g, '').split('/');
 
                 json = {
-                    imgs,
+                    title,
+                    imgs: [..._imgs],
                     price
-                }
-
-                
+                };
             }
 
             fs.writeFile('./output_car.json', JSON.stringify(json, null, 4), () => {
@@ -82,7 +78,7 @@ module.exports = (() => {
             if (!error) {
                 const $ = cheerio.load(html);
 
-                const imgs = $('.rst-ocb-i-i').map((_, img) => imgLink.urlParser($(img).attr('src'))).get();
+                const imgs = $('.rst-ocb-i-i').map((_, img) => carList.urlParser($(img).attr('src'))).get();
                 const titles = $('.rst-ocb-i-h').map((_, title) => $(title).text()).get();
                 const carDetails = $('.rst-ocb-i-d-l-i-s').map((_, detail) => $(detail).text()).get();
                 const descriptions = $('.rst-ocb-i-d-d').map((_, description) => $(description).text()).get();
@@ -105,16 +101,16 @@ module.exports = (() => {
                     imgs
                 };
                 const unpackedCarDetails = {
-                    ...unpack.getDetailsObj(carDetails)
+                    ...carList.getDetailsObj(carDetails)
                 };
 
-                json = jsonObj.getJson({ ...carMainDetails,
+                json = carList.getJson({ ...carMainDetails,
                     ...unpackedCarDetails
                 });
             }
 
             // fs.writeFile('./output.json', JSON.stringify(json, null, 4), () => {
-                // console.log('File successfully written! - Check your project directory for the output.json file');
+            // console.log('File successfully written! - Check your project directory for the output.json file');
             // });
             res.send(json);
         });

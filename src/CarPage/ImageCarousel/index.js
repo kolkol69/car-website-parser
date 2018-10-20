@@ -12,6 +12,7 @@ const ImageCarousel = (props) => {
                 <ol className="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
                 </ol>
 
                 <div className="carousel-inner">
@@ -21,6 +22,10 @@ const ImageCarousel = (props) => {
 
                     <div className="item">
                         <img src={car.img[1]} alt='car' />
+                    </div>
+
+                    <div className="item">
+                        <img src={car.img[2]} alt='car' />
                     </div>
 
                     <a className="left carousel-control" href="#myCarousel" data-slide="prev">

@@ -1,7 +1,12 @@
 {
-    "imgs": [],
+    "title": "Продам AUDI A6 ",
+    "imgs": [
+        "http://img1.rstcars.com/oldcars/audi/a6/8896051-1.jpg",
+        "http://img1.rstcars.com/oldcars/audi/a6/8896051-2.jpg",
+        "http://img1.rstcars.com/oldcars/audi/a6/8896051-3.jpg"
+    ],
     "price": [
-        "133200 грн ",
-        " $4750"
+        "130400 грн ",
+        " $4650"
     ]
 }

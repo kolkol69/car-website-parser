@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 export default class CarDetails extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
-        carAPI: PropTypes.array.isRequired
+        carAPI: PropTypes.object.isRequired
     }
     
     render() {
-        const car = this.props.carAPI[this.props.id];
+        const car = this.props.carAPI;
         return (
             <div className='col-md-12'>
                 <table className="table table-hover">

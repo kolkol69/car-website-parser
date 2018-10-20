@@ -15,14 +15,14 @@ class CarPage extends React.Component {
         const queryParams = getAllUrlParams();
         console.log('queryParams', queryParams)
         fetch(`http://localhost:3000/cars_data/${this.props.id}?type=${queryParams.type}&model=${queryParams.model}`)
-            .then(data => console.log(data));
+            .then(data => this.setState({carAPI: data}));
     }
     render() {
         const props = this.props;
-        if (!this.state.carAPI[props.id]) {
+        if (this.state.carAPI.length == 0) {
             return (
                 <div>
-                    Sorry, the given car id was not found
+                    Loading ... 
             </div>
             );
         }

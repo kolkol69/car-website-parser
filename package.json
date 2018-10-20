@@ -4,7 +4,7 @@
   "description": "Boilerplate for fast start",
   "scripts": {
     "start": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "nodemon server/server.js",
+    "open:src": "node server/server.js",
     "lint": "esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch"
   },
