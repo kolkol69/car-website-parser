@@ -5,15 +5,10 @@ const path = require('path');
 const open = require('open');
 const webpackConfig = require('../webpack.config.dev');
 const router = require('./routes/car.routes');
-const bodyParser = require('body-parser');
 
 const port = 3000;
 const app = express();
 const compiler = webpack(webpackConfig);
-
-app.use(bodyParser.urlencoded({ extended: false }));  
-
-app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const origin = req.get('origin');
@@ -33,11 +28,9 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-
-
 app.use('/cars_data', router);
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 

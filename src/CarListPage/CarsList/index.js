@@ -6,19 +6,18 @@ import './style.css';
 
 const CarsList = (props) => {
   const carAPI = props.filteredArray;
-
   return (
     <ListGroup className='row list-unstyled'>
       {
-        carAPI.map((car, i) => (
+        carAPI.map((car, i, arr) => (
           <ListGroupItem
             key={car.id}
             className='col-md-6 col-xs-12'
           >
-            <Link className='col-md-1 col-xs-6' to={`${getCarUrl(props, car.number)}`}>
+            <Link className='col-md-1 col-xs-6' to={props.getCarUrl(arr, i)}>
               <Image className='img-icon' src={car.img[0]} />
             </Link>
-            <Link className='title-link col-md-6 col-xs-6 col-md-offset-5' to={`${getCarUrl(props, car.number)}`}>
+            <Link className='title-link col-md-6 col-xs-6 col-md-offset-5' to={props.getCarUrl(arr, i)}>
               <h4>{car.title}</h4>
             </Link>
             <span className='col-md-6 col-xs-6 col-md-offset-5'>
@@ -33,14 +32,9 @@ const CarsList = (props) => {
   );
 };
 
-const getCarUrl = (props, number) => {
-  const trimedUrl = props.filteredArray[number].link.split('.')[1].split('/');
-  // return `/cars/${number}`;
-  return `/cars/${number}?type=${trimedUrl[3]}&model=${trimedUrl[4]}`;
-};  
-
 CarsList.propTypes = {
-  filteredArray : PropTypes.array.isRequired
+  filteredArray: PropTypes.array.isRequired,
+  getCarUrl: PropTypes.func.isRequired
 };
 
 export default CarsList;

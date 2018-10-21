@@ -15,6 +15,11 @@ export default class CarsFilteredList extends Component {
     this.setState({ filteredArray });
   }
 
+  getCarUrl = (filteredArr, number) => {
+    const trimedUrl = filteredArr[number].link.split('.')[1].split('/');
+    return `/cars/${number}?type=${trimedUrl[3]}&model=${trimedUrl[4]}`;
+  };  
+
   render() {
     return (
       <div>
@@ -23,7 +28,7 @@ export default class CarsFilteredList extends Component {
             <FormControl onChange={this.filterList} type="text" placeholder="Search" />
           </FormGroup>
         </form>
-        <CarList filteredArray={this.state.filteredArray.length ? this.state.filteredArray : this.props.carAPI} {...this.props} />
+        <CarList getCarUrl = {this.getCarUrl} filteredArray={this.state.filteredArray.length ? this.state.filteredArray : this.props.carAPI} {...this.props} />
       </div>
     );
   }

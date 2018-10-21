@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const ImageCarousel = (props) => {
     const car = props.carAPI;
-    console.log('car', car);
     return (
         <div className='row car-page-body'>
             <div className='col-md-12'>
@@ -45,7 +44,7 @@ const ImageCarousel = (props) => {
 
 ImageCarousel.propTypes = {
     id: PropTypes.string.isRequired,
-    carAPI: PropTypes.array.isRequired
+    carAPI: PropTypes.object.isRequired
 };
 
 export default ImageCarousel;
