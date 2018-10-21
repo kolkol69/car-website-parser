@@ -3,29 +3,45 @@ import PropTypes from 'prop-types';
 import CarDetails from './CarDetails';
 import ImageCarousel from './ImageCarousel';
 import { Link } from 'react-router-dom';
+import { css } from 'react-emotion';
+import { ClipLoader } from 'react-spinners';
 import './style.css';
 
+const override = css`
+    display: block;
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    `;
 class CarPage extends React.Component {
 
     state = {
-        carAPI: []
+        carAPI: [],
+        loading: true
     }
+
     componentDidMount() {
-        const {type, model} = getAllUrlParams();
+        const { type, model } = getAllUrlParams();
         fetch(`http://localhost:3000/cars_data/${this.props.id}?type=${type}&model=${model}`)
             .then(response => response.json())
-            .then(data => this.setState({carAPI: data}));
+            .then(data => this.setState({ carAPI: data, loading: false }));
     }
+
     render() {
         const props = this.props;
-        if (this.state.carAPI.length == 0) {
+        if (this.state.loading) {
             return (
-                <div>
-                    Loading ... 
-            </div>
+                <div className='sweet-loading'>
+                    <ClipLoader
+                        className={override}
+                        sizeUnit={"px"}
+                        size={100}
+                        color={'#00cccc'}
+                        loading={this.state.loading}
+                    />
+                </div>
             );
         }
-
         return (
             <div>
                 <ImageCarousel carAPI={this.state.carAPI} {...props} />
@@ -66,10 +82,6 @@ const getAllUrlParams = (url) => {
 
             // set parameter value (use 'true' if empty)
             let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-
-            // (optional) keep case consistent
-            paramName = paramName.toLowerCase();
-            paramValue = paramValue.toLowerCase();
 
             // if parameter name already exists
             if (obj[paramName]) {

@@ -11,13 +11,6 @@
     color: red;
 }
 
-/* visited link */
-.title-link:visited {
-    outline: none;
-    text-decoration: none;
-    color: rgb(0, 255, 213);
-}
-
 /* mouse over link */
 .title-link:hover {
     outline: none;

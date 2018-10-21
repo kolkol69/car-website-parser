@@ -54,10 +54,6 @@ export default class CarDetails extends Component {
                             <td>Description:</td>
                             <td className='td-about'>{car.description}</td>
                         </tr>
-                        <tr>
-                            <td>Contacts:</td>
-                            <td className='td-about'>{[...car.contacts]}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

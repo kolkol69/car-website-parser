@@ -9,10 +9,8 @@ const request = require('request', {
     }
 });
 
-const car = require('../controls/car'); //urlParser
+const car = require('../controls/car');
 const carList = require('../controls/car.list.js');
-
-
 
 module.exports = (() => {
     'use strict';
@@ -47,9 +45,6 @@ module.exports = (() => {
                 const amountToRemove = details.length-7;
                 const [year, engine, transmissionType, bodyType, location, views, updateDate] = details.splice(amountToRemove);
                 const description = $('#rst-page-oldcars-item-option-block-container-desc').text();
-                const contacts = $('.rst-page-oldcars-item-option-block-container')
-                    .map((_, el) => $(el).children()).get()[1]
-                    .map((_, el) => $(el).text()).get();
 
                 json = {
                     title,
@@ -63,8 +58,7 @@ module.exports = (() => {
                     views,
                     updateDate,
                     url,
-                    description,
-                    contacts
+                    description
                 };
             }
 

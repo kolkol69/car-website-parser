@@ -32,7 +32,7 @@
 }
 
 .back-link:link, .back-link:visited {
-    background-color: #0d5f4d9d;
+    background-color: #019191;
     color: white;
     padding: 14px 25px;
     text-align: center; 
@@ -41,5 +41,5 @@
 }
 
 .back-link:hover, .back-link:active {
-    background-color: #18887098;
+    background-color: #019191c5;
 }
