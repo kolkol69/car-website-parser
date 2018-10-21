@@ -2,7 +2,6 @@
 const express = require('express');
 const cheerio = require('cheerio');
 const iconv = require('iconv-lite');
-const fs = require('fs');
 const request = require('request', {
     headers: {
         'Content-Type': 'text/html; charset=UTF-8'
