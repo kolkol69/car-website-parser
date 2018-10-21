@@ -33,17 +33,23 @@ module.exports = (() => {
 
             if (!error) {
                 const $ = cheerio.load(html);
+                const listSelector = $('.rst-uix-list-superline');
+                const tableSelector = $('.rst-uix-table-superline');
+
                 const title = $('#rst-page-oldcars-item-header').text()
                     .substring($('#rst-page-oldcars-item-header').children().text().length);
-                const imgs = $('.rst-uix-float-left', '.rst-uix-radius').map((_, img) => car.urlParser($(img).attr('href'))).get();
-                const details = $('.rst-uix-table-superline').children().map((_, elem) => $(elem).text().split(':')[1]).get();
-                console.log(details)
+                const imgs = $('.rst-uix-float-left', '.rst-uix-radius')
+                    .map((_, img) => car.urlParser($(img).attr('href'))).get();
+                const detailsSelector = listSelector.children().length > 0 ? listSelector : tableSelector;
+                const details = detailsSelector.children()
+                    .map((_, elem) => $(elem).text().split(':')[1]).get();
                 const price = details[0].replace(/\'/g, '').split('/').join(' - ');
-                const [_, year, engine, transmissionType, bodyType, location, views, updateDate] = details;
+                const amountToRemove = details.length-7;
+                const [year, engine, transmissionType, bodyType, location, views, updateDate] = details.splice(amountToRemove);
                 const description = $('#rst-page-oldcars-item-option-block-container-desc').text();
                 const contacts = $('.rst-page-oldcars-item-option-block-container')
-                .map((_,el)=> $(el).children()).get()[1]
-                .map((_, el)=> $(el).text()).get();
+                    .map((_, el) => $(el).children()).get()[1]
+                    .map((_, el) => $(el).text()).get();
 
                 json = {
                     title,
@@ -51,7 +57,7 @@ module.exports = (() => {
                     price,
                     year,
                     engine,
-                    transmissionType, 
+                    transmissionType,
                     bodyType,
                     location,
                     views,
