@@ -15,7 +15,7 @@ const CarsList = (props) => {
             className='col-md-6 col-xs-12'
           >
             <Link className='col-md-1 col-xs-6' to={props.getCarUrl(arr, i)}>
-              <Image className='img-icon' src={car.img[0]} />
+              <Image className='img-icon' src={car.img} />
             </Link>
             <Link className='title-link col-md-6 col-xs-6 col-md-offset-5' to={props.getCarUrl(arr, i)}>
               <h4>{car.title}</h4>
@@ -24,6 +24,12 @@ const CarsList = (props) => {
               Price: {car.price}
               <br />
               Year: {car.year}
+              <br/>
+              Location: {car.location}
+              <br/>
+              Engine: {car.engine}
+              <br/>
+              {car.mileage}
             </span>
           </ListGroupItem>
         ))

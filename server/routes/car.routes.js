@@ -19,7 +19,7 @@ module.exports = (() => {
     router.get('/:id', (req, res) => {
         const url = 'http://rst.ua/oldcars/audi/' + req.query.type + '/' + req.query.model + '.html';
 
-        let json = [];
+        let json = {};
         const requestOptions = {
             encoding: null,
             method: "GET",

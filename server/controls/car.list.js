@@ -1,10 +1,8 @@
-const ID = () => '_' + Math.random().toString(36).substr(2, 9);
 
 module.exports.getJson = (carDetails) => {
-    let json = [];
-
-    // const ? let ? ???
-    ({
+    const ID = () => '_' + Math.random().toString(36).substr(2, 9);
+    const json = [];
+    const {
         titles,
         descriptions,
         mileages,
@@ -17,7 +15,7 @@ module.exports.getJson = (carDetails) => {
         conditions,
         engines,
         transmissionTypes
-    } = carDetails);
+    } = carDetails;
 
     titles.forEach((title, i) => {
         json.push({
@@ -68,11 +66,7 @@ module.exports.getDetailsObj = (details) => {
 };
 
 module.exports.urlParser = (src) => {
-    let link1 = src;
-    let srcArray = link1.split('/');
+    const srcArray = src.split('/');
     srcArray[srcArray.indexOf('middle')] = 'big';
-    link1 = srcArray.join('/');
-    return {
-        0: link1
-    };
+    return srcArray.join('/');
 };
